@@ -1,3 +1,4 @@
+import 'package:ecocredit/services/auth.dart';
 import 'package:ecocredit/services/widget_support.dart';
 import 'package:flutter/material.dart';
 
@@ -44,37 +45,42 @@ class _LoginState extends State<Login> {
             ),
             Text("Get Started!", style: AppWidget.greenTextstyle(24.0)),
             SizedBox(height: 30.0),
-            Container(
-              margin: EdgeInsets.only(left: 20.0,right: 20.0),
-              child: Material(
-                elevation: 4.5,
-                  borderRadius: BorderRadius.circular(33),
-
-                child: Container(
-                  padding: EdgeInsets.only(left: 20.0),
-
-                  height: 80,
-                  decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.circular(33)),
-                  child: Row(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(60),
+            GestureDetector(
+              onTap: (){
+                AuthMethods().signInWithGoogle(context);
+              },
+              child: Container(
+                margin: EdgeInsets.only(left: 20.0,right: 20.0),
+                child: Material(
+                  elevation: 4.5,
+                    borderRadius: BorderRadius.circular(33),
+              
+                  child: Container(
+                    padding: EdgeInsets.only(left: 20.0),
+              
+                    height: 80,
+                    decoration: BoxDecoration(color: Colors.green,borderRadius: BorderRadius.circular(33)),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(60),
+                          ),
+                          child: Image.asset(
+                            "images/google.png",
+                            height: 50,
+                            width: 50,
+                            fit: BoxFit.cover,
+                          ),
+              
                         ),
-                        child: Image.asset(
-                          "images/google.png",
-                          height: 50,
-                          width: 50,
-                          fit: BoxFit.cover,
-                        ),
-
-                      ),
-                      SizedBox(width: 20.0,),
-
-                      Text("Sign in With Google",style: AppWidget.whiteTextstyle(25.0),)
-                    ],
+                        SizedBox(width: 20.0,),
+              
+                        Text("Sign in With Google",style: AppWidget.whiteTextstyle(25.0),)
+                      ],
+                    ),
                   ),
                 ),
               ),
