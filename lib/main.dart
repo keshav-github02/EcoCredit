@@ -1,6 +1,7 @@
 import 'package:ecocredit/pages/home.dart';
 import 'package:ecocredit/pages/login.dart';
 import 'package:ecocredit/pages/onboarding.dart';
+import 'package:ecocredit/pages/upload_item.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Login(),
+      home: UploadItem(),
     );
   }
 }
