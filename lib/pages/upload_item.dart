@@ -55,6 +55,7 @@ class _UploadItemState extends State<UploadItem> {
                 ),
                 child: Column(
                   children: [
+                    SizedBox(height: 30.0,),
                     Container(
                       height: 180,
                       width: 180,
@@ -62,6 +63,18 @@ class _UploadItemState extends State<UploadItem> {
                       border: Border.all(color: Colors.black45,width: 2.0),borderRadius: BorderRadius.circular(20)),
                       child: Icon(Icons.camera_alt_outlined,size: 30,),
                     ),
+                    SizedBox(height: 30,),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Text("Enter you address you want your item to be picked",style: AppWidget.normalTextstyle(18.0),),
+                    ),
+                    SizedBox(height: 10,),
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 20.0),
+                      decoration: BoxDecoration(color: Colors.white),
+                      child: TextField(
+                        decoration: InputDecoration(border: InputBorder.none),
+                      ),)
                   ],
                 ),
               ),
