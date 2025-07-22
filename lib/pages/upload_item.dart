@@ -12,6 +12,7 @@ class _UploadItemState extends State<UploadItem> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         margin: EdgeInsets.only(top: 40.0),
         child: Column(
@@ -19,9 +20,7 @@ class _UploadItemState extends State<UploadItem> {
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
               child: Row(
-
                 children: [
-
                   Material(
                     elevation: 3.0,
                     borderRadius: BorderRadius.circular(60),
@@ -31,37 +30,42 @@ class _UploadItemState extends State<UploadItem> {
                         color: Colors.black,
                         borderRadius: BorderRadius.circular(60),
                       ),
-                      child: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,size: 30.0,),
+                      child: Icon(
+                        Icons.arrow_back_ios_new_rounded,
+                        color: Colors.white,
+                        size: 30.0,
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width/5.5,
-                  ),
-                  Text("Upload Item",style: AppWidget.headlineTextstyle(25.0),),
+                  SizedBox(width: MediaQuery.of(context).size.width / 5.5),
+                  Text("Upload Item", style: AppWidget.headlineTextstyle(25.0)),
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30)),
-                color: Color(0xFFececf8),
-
-              ),
-              child: Column(
-                children: [
-                  Container(
-
-                   height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-
-                      color: Colors.white,
-                    ),
+            SizedBox(height: 20.0),
+            Expanded(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
-                ],
+                  color: Color(0xFFececf8),
+                ),
+                child: Column(
+                  children: [
+                    Container(
+                      height: 180,
+                      width: 180,
+                      decoration: BoxDecoration(color: Colors.white,
+                      border: Border.all(color: Colors.black45,width: 2.0),borderRadius: BorderRadius.circular(20)),
+                      child: Icon(Icons.camera_alt_outlined,size: 30,),
+                    ),
+                  ],
+                ),
               ),
             ),
-
           ],
         ),
       ),
