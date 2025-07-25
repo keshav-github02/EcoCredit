@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:ecocredit/services/widget_support.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UploadItem extends StatefulWidget {
   String category,id;
@@ -10,6 +13,18 @@ class UploadItem extends StatefulWidget {
 }
 
 class _UploadItemState extends State<UploadItem> {
+
+  final ImagePicker _picker=ImagePicker();
+  File? selectedImage;
+
+  Future getImage()async{
+    var image=await _picker.pickImage(source: ImageSource.gallery);
+    selectedImage=File(image!.path);
+    setState(() {
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
