@@ -221,6 +221,7 @@ class _UploadItemState extends State<UploadItem> {
                             "Quantity": quatityController.text,
                             "UserId": id,
                             "UserName": name,
+                            "Status": "Pending"
                           };
                           await DatabaseMethods().addUserUploadItem(
                             addItem,
