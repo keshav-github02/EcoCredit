@@ -21,16 +21,13 @@ class _UploadItemState extends State<UploadItem> {
   TextEditingController quatityController = new TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? selectedImage;
-  String? id,name;
+  String? id, name;
 
-  getthesharedpref()async{
-    id=await SharedPreferenceHelper().getUserId();
-    name= await SharedPreferenceHelper().getUserName();
+  getthesharedpref() async {
+    id = await SharedPreferenceHelper().getUserId();
+    name = await SharedPreferenceHelper().getUserName();
 
-    setState(() {
-
-    });
-
+    setState(() {});
   }
 
   Future getImage() async {
@@ -44,8 +41,8 @@ class _UploadItemState extends State<UploadItem> {
     // TODO: implement initState
     super.initState();
     getthesharedpref();
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,12 +92,17 @@ class _UploadItemState extends State<UploadItem> {
                   children: [
                     SizedBox(height: 30.0),
                     selectedImage != null
-                        ? Container(
-                          height: 180,
-                            width: 180,
-                            child: Image.file(
-                              selectedImage!,
-                              fit: BoxFit.cover,
+                        ? Center(
+                            child: Container(
+                              height: 180,
+                              width: 180,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(20),
+                                child: Image.file(
+                                  selectedImage!,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
                             ),
                           )
                         : GestureDetector(
@@ -196,25 +198,51 @@ class _UploadItemState extends State<UploadItem> {
                     ),
                     SizedBox(height: 50.0),
                     GestureDetector(
-                      onTap:()async{
-                        if(selectedImage!=null && addressController.text!="" && quatityController.text!=""){
-                          String itemid=randomAlphaNumeric(10);
-                           Reference firebaseStorageref=FirebaseStorage.instance.ref().child("blogImage").child(itemid);
+                      onTap: () async {
+                        if (addressController.text != "" &&
+                            quatityController.text != "") {
+                          String itemid = randomAlphaNumeric(10);
+                          // Reference firebaseStorageref = FirebaseStorage
+                          //     .instance
+                          //     .ref()
+                          //     .child("blogImage")
+                          //     .child(itemid);
+                          //
+                          // final UploadTask task = firebaseStorageref.putFile(
+                          //   selectedImage!,
+                          // );
+                          // var downloadURl = await (await task).ref
+                          //     .getDownloadURL();
 
-                           final UploadTask task= firebaseStorageref.putFile(selectedImage!);
-                           var downloadURl=await(await task).ref.getDownloadURL();
-
-                           Map<String ,dynamic> addItem={
-                             "Image":downloadURl,
-                             "Address":addressController.text,
-                             "Quantity":quatityController.text,
-                             "UserId":id,
-                             "UserName":name,
-                           };
-                           await DatabaseMethods().addUserUploadItem(addItem, id!, itemid)
-
+                          Map<String, dynamic> addItem = {
+                            "Image": "",
+                            "Address": addressController.text,
+                            "Quantity": quatityController.text,
+                            "UserId": id,
+                            "UserName": name,
+                          };
+                          await DatabaseMethods().addUserUploadItem(
+                            addItem,
+                            id!,
+                            itemid,
+                          );
+                          await DatabaseMethods().addAdminItem(addItem, itemid);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              backgroundColor: Colors.green,
+                              content: Text(
+                                "Your Data has been Uploaded Successfully",
+                                style: AppWidget.whiteTextstyle(22.0),
+                              ),
+                            ),
+                          );
+                          setState(() {
+                            addressController.text="";
+                            quatityController.text="";
+                            selectedImage=null;
+                          });
                         }
-                      } ,
+                      },
                       child: Center(
                         child: Material(
                           elevation: 2.0,
