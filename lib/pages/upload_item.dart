@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UploadItem extends StatefulWidget {
-  String category,id;
+  String category, id;
   UploadItem({required this.category, required this.id});
 
   @override
@@ -13,16 +13,15 @@ class UploadItem extends StatefulWidget {
 }
 
 class _UploadItemState extends State<UploadItem> {
-
-  final ImagePicker _picker=ImagePicker();
+  TextEditingController addressController = new TextEditingController();
+  TextEditingController quatityController = new TextEditingController();
+  final ImagePicker _picker = ImagePicker();
   File? selectedImage;
 
-  Future getImage()async{
-    var image=await _picker.pickImage(source: ImageSource.gallery);
-    selectedImage=File(image!.path);
-    setState(() {
-
-    });
+  Future getImage() async {
+    var image = await _picker.pickImage(source: ImageSource.gallery);
+    selectedImage = File(image!.path);
+    setState(() {});
   }
 
   @override
@@ -73,18 +72,38 @@ class _UploadItemState extends State<UploadItem> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: 30.0),
-                    Center(
-                      child: Container(
-                        height: 180,
-                        width: 180,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.black45, width: 2.0),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Icon(Icons.camera_alt_outlined, size: 30),
-                      ),
-                    ),
+                    selectedImage != null
+                        ? Container(
+                          height: 180,
+                            width: 180,
+                            child: Image.file(
+                              selectedImage!,
+                              fit: BoxFit.cover,
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: () {
+                              getImage();
+                            },
+                            child: Center(
+                              child: Container(
+                                height: 180,
+                                width: 180,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  border: Border.all(
+                                    color: Colors.black45,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: Icon(
+                                  Icons.camera_alt_outlined,
+                                  size: 30,
+                                ),
+                              ),
+                            ),
+                          ),
                     SizedBox(height: 30),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -105,6 +124,7 @@ class _UploadItemState extends State<UploadItem> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            controller: addressController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
@@ -138,6 +158,7 @@ class _UploadItemState extends State<UploadItem> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: TextField(
+                            controller: quatityController,
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               prefixIcon: Icon(
@@ -151,23 +172,27 @@ class _UploadItemState extends State<UploadItem> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 50.0,),
+                    SizedBox(height: 50.0),
                     Center(
                       child: Material(
                         elevation: 2.0,
                         borderRadius: BorderRadius.circular(20),
                         child: Container(
                           height: 60,
-                          width: MediaQuery.of(context).size.width/1.5,
+                          width: MediaQuery.of(context).size.width / 1.5,
                           decoration: BoxDecoration(
                             color: Colors.green,
-                            borderRadius: BorderRadius.circular(20)
+                            borderRadius: BorderRadius.circular(20),
                           ),
-                          child: Center(child: Text("Upload",style: AppWidget.whiteTextstyle(26.0),)),
+                          child: Center(
+                            child: Text(
+                              "Upload",
+                              style: AppWidget.whiteTextstyle(26.0),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-
                   ],
                 ),
               ),
