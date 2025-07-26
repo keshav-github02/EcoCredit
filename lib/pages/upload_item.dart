@@ -199,7 +199,8 @@ class _UploadItemState extends State<UploadItem> {
                     SizedBox(height: 50.0),
                     GestureDetector(
                       onTap: () async {
-                        if (addressController.text != "" &&
+                        if (
+                        addressController.text != "" &&
                             quatityController.text != "") {
                           String itemid = randomAlphaNumeric(10);
                           // Reference firebaseStorageref = FirebaseStorage
