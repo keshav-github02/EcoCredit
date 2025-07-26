@@ -173,21 +173,24 @@ class _UploadItemState extends State<UploadItem> {
                       ),
                     ),
                     SizedBox(height: 50.0),
-                    Center(
-                      child: Material(
-                        elevation: 2.0,
-                        borderRadius: BorderRadius.circular(20),
-                        child: Container(
-                          height: 60,
-                          width: MediaQuery.of(context).size.width / 1.5,
-                          decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "Upload",
-                              style: AppWidget.whiteTextstyle(26.0),
+                    GestureDetector(
+                      onTap: ,
+                      child: Center(
+                        child: Material(
+                          elevation: 2.0,
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            height: 60,
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Upload",
+                                style: AppWidget.whiteTextstyle(26.0),
+                              ),
                             ),
                           ),
                         ),
