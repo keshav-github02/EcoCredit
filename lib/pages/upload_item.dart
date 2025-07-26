@@ -1,8 +1,12 @@
 import 'dart:io';
 
+import 'package:ecocredit/services/database.dart';
+import 'package:ecocredit/services/shared_pref.dart';
 import 'package:ecocredit/services/widget_support.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:random_string/random_string.dart';
 
 class UploadItem extends StatefulWidget {
   String category, id;
@@ -17,6 +21,17 @@ class _UploadItemState extends State<UploadItem> {
   TextEditingController quatityController = new TextEditingController();
   final ImagePicker _picker = ImagePicker();
   File? selectedImage;
+  String? id,name;
+
+  getthesharedpref()async{
+    id=await SharedPreferenceHelper().getUserId();
+    name= await SharedPreferenceHelper().getUserName();
+
+    setState(() {
+
+    });
+
+  }
 
   Future getImage() async {
     var image = await _picker.pickImage(source: ImageSource.gallery);
@@ -24,6 +39,13 @@ class _UploadItemState extends State<UploadItem> {
     setState(() {});
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getthesharedpref();
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -174,7 +196,25 @@ class _UploadItemState extends State<UploadItem> {
                     ),
                     SizedBox(height: 50.0),
                     GestureDetector(
-                      onTap: ,
+                      onTap:()async{
+                        if(selectedImage!=null && addressController.text!="" && quatityController.text!=""){
+                          String itemid=randomAlphaNumeric(10);
+                           Reference firebaseStorageref=FirebaseStorage.instance.ref().child("blogImage").child(itemid);
+
+                           final UploadTask task= firebaseStorageref.putFile(selectedImage!);
+                           var downloadURl=await(await task).ref.getDownloadURL();
+
+                           Map<String ,dynamic> addItem={
+                             "Image":downloadURl,
+                             "Address":addressController.text,
+                             "Quantity":quatityController.text,
+                             "UserId":id,
+                             "UserName":name,
+                           };
+                           await DatabaseMethods().addUserUploadItem(addItem, id!, itemid)
+
+                        }
+                      } ,
                       child: Center(
                         child: Material(
                           elevation: 2.0,
