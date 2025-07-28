@@ -37,7 +37,7 @@ class _AdminApprovalState extends State<AdminApproval> {
                       ),
                     ),
                   ),
-                  SizedBox(width: MediaQuery.of(context).size.width / 7),
+                  SizedBox(width: MediaQuery.of(context).size.width / 6.5),
                   Text("Admin Approval", style: AppWidget.headlineTextstyle(25.0)),
                 ],
               ),
