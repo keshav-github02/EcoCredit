@@ -55,7 +55,7 @@ class _AdminApprovalState extends State<AdminApproval> {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [],
+
                 ),
               ),
             ),
