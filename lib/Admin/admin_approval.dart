@@ -42,7 +42,7 @@ class _AdminApprovalState extends State<AdminApproval> {
                 ],
               ),
             ),
-            SizedBox(height: 21.0),
+            SizedBox(height: 20.0),
             Expanded(
               child: Container(
                 width: MediaQuery.of(context).size.width,
