@@ -1,3 +1,4 @@
+import 'package:ecocredit/admin/admin_approval.dart';
 import 'package:ecocredit/pages/home.dart';
 import 'package:ecocredit/pages/login.dart';
 import 'package:ecocredit/pages/onboarding.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
         // tested with just a hot reload.
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: Login(),
+      home: AdminApproval(),
     );
   }
 }
