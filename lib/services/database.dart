@@ -9,10 +9,10 @@ class DatabaseMethods {
   }
 
   Future addUserUploadItem(
-    Map<String, dynamic> userInfoMap,
-    String id,
-    String itemid,
-  ) async {
+      Map<String, dynamic> userInfoMap,
+      String id,
+      String itemid,
+      ) async {
     return await FirebaseFirestore.instance
         .collection("users")
         .doc(id)
@@ -26,9 +26,15 @@ class DatabaseMethods {
       String id,
       ) async {
     return await FirebaseFirestore.instance
-        .collection("Requests ")
+        .collection("Requests") // ✅ removed trailing space
         .doc(id)
         .set(userInfoMap);
   }
-}
 
+  Stream<QuerySnapshot> getAdminApproval() {
+    return FirebaseFirestore.instance
+        .collection("Requests")
+        .where("Status", isEqualTo: "Pending") // ✅ keep only one function
+        .snapshots();
+  }
+}
